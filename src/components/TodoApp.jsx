@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 
 import * as actionCreators from '../actions/action_creators'
 
-export class TodoApp extends Component {
+export default class TodoApp extends Component {
   constructor(props) {
     super(props)
     this.getActiveItems = this.getActiveItems.bind(this)

@@ -1,17 +1,21 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import {List, Map} from 'immutable'
 import {compose, createStore} from 'redux'
 import {Provider} from 'react-redux'
 import reducer from './reducers/reducer'
-import {TodoAppContainer} from './components/TodoApp'
-import './index.css'
+import { Router, browserHistory } from 'react-router'
+import routes from './routes'
 
 
-const createStoreDevTools = compose(
-  window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)
 
-const store = createStoreDevTools(reducer)
+let initialState = window.__INITIAL_STATE__
+
+// const createStoreDevTools = compose(
+//   window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)
+
+const store = createStore(reducer, initialState)
+
 
 store.dispatch({
   type: 'SET_STATE',
@@ -26,9 +30,10 @@ store.dispatch({
 })
 
 
-ReactDOM.render(
-  <Provider store={store}>
-    <TodoAppContainer />
-  </Provider>,
+
+render(
+    <Provider store={store}>
+    <Router routes={routes} history={browserHistory}/>
+    </Provider>,
   document.getElementById('app')
 )
