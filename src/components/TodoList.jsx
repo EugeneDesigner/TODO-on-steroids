@@ -21,6 +21,7 @@ export default class TodoList extends Component {
     return item.get('status') === 'completed'
   }
   render() {
+    console.log(this.getItems(), this.props.todos)
     return (
     <section className="main">
       <ul className="todo-list">

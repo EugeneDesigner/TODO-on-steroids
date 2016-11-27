@@ -1,42 +1,72 @@
 const webpack = require('webpack')
 const path    = require('path')
-const prod    = require('./webpack.prod.config')
+const ExtractTextPlugin  = require('extract-text-webpack-plugin')
 
-Object.assign = require('object-assign')
 
-module.exports = Object.assign(prod, {
-  entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
-    'webpack/hot/only-dev-server',
-    './src/index.jsx'
-  ],
+const publicPath       = '/public/assets'
+let cssName            = process.env.NODE_ENV === 'production' ? 'styles-[hash].css' : 'styles.css'
+let jsName             = process.env.NODE_ENV === 'production' ? 'bundle-[hash].js' : 'bundle.js'
+
+
+
+let plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      BROWSER: JSON.stringify(true),
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+    }
+  }),
+  new ExtractTextPlugin(cssName)
+]
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(
+    new CleanWebpackPlugin([ 'public/assets/' ], {
+      root: __dirname,
+      verbose: true,
+      dry: false
+    })
+  );
+  plugins.push(new webpack.optimize.DedupePlugin());
+  plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+}
+
+
+
+module.exports = {
+
+  entry: ['./src/index.js'],
+  debug: process.env.NODE_ENV !== 'production',
+  resolve: {
+    root:               path.join(__dirname, 'src'),
+    modulesDirectories: ['node_modules'],
+    extensions:         ['', '.js', '.jsx']
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: jsName,
+    publicPath
+  },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /public/],
         loader: 'babel'
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       }
     ]
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
-
-  devtool: 'inline-source-map',
+  plugins,
   devServer: {
-    hot: true,
-    proxy: {
-      '*': 'http://127.0.0.1:' + (process.env.PORT || 3000)
-    },
-    host: '127.0.0.1'
-  }
-})
+   headers: { 'Access-Control-Allow-Origin': '*' }
+   },
+
+  devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : null
+
+}

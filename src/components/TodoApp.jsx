@@ -4,10 +4,11 @@ import TodoHeader from './TodoHeader'
 import TodoTools from './TodoTools'
 import {Footer} from './Footer'
 import {connect} from 'react-redux'
+import DevTools from './DevTools'
 
 import * as actionCreators from '../actions/action_creators'
 
-export default class TodoApp extends Component {
+export class TodoApp extends Component {
   constructor(props) {
     super(props)
     this.getActiveItems = this.getActiveItems.bind(this)
@@ -25,6 +26,7 @@ export default class TodoApp extends Component {
 
 
   render() {
+    console.log(this.props.todos)
     return (
       <div>
         <section className="todoapp">
@@ -34,6 +36,7 @@ export default class TodoApp extends Component {
                       filter={this.props.filter}
                       getActiveItems={this.getActiveItems()}
                       clearCompleted={this.props.clearCompleted}/>
+        <DevTools/>
         </section>
         <Footer/>
       </div>

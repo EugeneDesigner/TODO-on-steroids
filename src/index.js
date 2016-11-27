@@ -1,20 +1,16 @@
 import React from 'react'
 import { render } from 'react-dom'
-import {List, Map} from 'immutable'
-import {compose, createStore} from 'redux'
+import {fromJS, Map} from 'immutable'
+import configureStore from './redux/configureStore'
 import {Provider} from 'react-redux'
 import reducer from './reducers/reducer'
 import { Router, browserHistory } from 'react-router'
 import routes from './routes'
+import './index.css'
 
 
-
-let initialState = window.__INITIAL_STATE__
-
-// const createStoreDevTools = compose(
-//   window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)
-
-const store = createStore(reducer, initialState)
+const initialState = fromJS(window.__INITIAL_STATE__) || Map()
+const store = configureStore(initialState)
 
 
 store.dispatch({

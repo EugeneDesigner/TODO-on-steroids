@@ -5,8 +5,7 @@ import { RouterContext, match }  from 'react-router'
 import { createLocation }        from 'history'
 import routes                    from './src/routes'
 import { Provider }              from 'react-redux'
-import reducer                   from './src/reducers/reducer'
-import { createStore}            from 'redux'
+import configureStore            from './src/redux/configureStore'
 import path                      from 'path'
 
 
@@ -15,7 +14,10 @@ const app = express()
 
 app.use( (req, res) => {
     const location = createLocation(req.url)
-    const store    = createStore(reducer)
+    const store = configureStore()
+
+
+    const state = store.getState()
 
     match({ routes: routes, location }, (err, redirectLocation, renderProps) => {
     if (err) {
@@ -29,12 +31,14 @@ app.use( (req, res) => {
 
     const componentHTML = renderToString(<Provider store={store}><RouterContext {...renderProps} /></Provider>)
 
-    const initialState = store.getState()
-    res.send(renderPage(componentHTML, initialState))
+
+    res.send(renderPage(componentHTML, state))
 
 
   })
 })
+
+const assetUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:8050' : '/'
 
 function renderPage(html, initialState) {
   return `
@@ -43,10 +47,11 @@ function renderPage(html, initialState) {
     <head>
       <meta charset="UTF-8">
       <title>Things to do</title>
+      <link rel="stylesheet" href="${assetUrl}/public/assets/styles.css">
     </head>
     <body>
       <div id="app">${html}</div>
-      <script type="application/javascript" src="/dist/bundle.js"></script>
+      <script type="application/javascript" src="${assetUrl}/public/assets/bundle.js"></script>
       <script type="application/javascript">
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
       </script>

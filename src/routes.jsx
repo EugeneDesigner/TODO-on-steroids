@@ -1,7 +1,8 @@
 import React from 'react'
 import {Route} from 'react-router'
-import Todo from './components/TodoApp'
+import {TodoAppContainer} from './components/TodoApp'
+
 
 export default (
-  <Route path="/" component={Todo}/>
+  <Route path="/" component={TodoAppContainer}/>
 )
