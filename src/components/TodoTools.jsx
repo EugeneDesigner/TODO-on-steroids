@@ -29,11 +29,11 @@ export default class TodoTools extends Component {
   render() {
 
     return (
-     <footer className="footer">
-       <span className="todo-count">
+     <footer className="todo__footer">
+       <span className="todo__footer-count">
          <strong>{this.itemsLeft()}</strong> items left
        </span>
-       <ul className="filters">
+       <ul className="todo__footer-filters">
          <li>
            <a href="#"
               onClick={() => this.props.changeFilter('all')}
@@ -56,7 +56,7 @@ export default class TodoTools extends Component {
             </a>
          </li>
        </ul>
-       <button className="clear-completed"
+       <button className="todo__footer-clear"
                onClick={this.props.clearCompleted}>
          Clear completed
        </button>

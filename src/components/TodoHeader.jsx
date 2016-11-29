@@ -21,9 +21,9 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className="header">
+      <header className="todo__header">
       <h1>Stuff to do</h1>
-      <input className="new-todo"
+      <input className="todo__new"
              ref="addTodoInput"
              autoFocus
              autoComplete="off"

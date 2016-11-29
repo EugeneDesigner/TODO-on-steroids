@@ -28,7 +28,7 @@ export class TodoApp extends Component {
   render() {
     console.log(this.props.todos)
     return (
-      <div>
+      <div className="app-container">
         <section className="todoapp">
           <TodoHeader addItem = {this.props.addItem}/>
           <TodoList {...this.props}/>
@@ -38,7 +38,11 @@ export class TodoApp extends Component {
                       clearCompleted={this.props.clearCompleted}/>
         <DevTools/>
         </section>
-        <Footer/>
+        <section></section>
+        <section></section>
+        <section className="reaction">
+          <p>Hello, this is my reaction to your shit</p>
+        </section>
       </div>
     )
   }

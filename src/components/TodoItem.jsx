@@ -17,7 +17,7 @@ export default class TodoItem extends Component {
     const { text, id, cancelEditing, doneEditing } = this.props
     return (
     <li className={itemClass}>
-      <div className="view">
+      <div className="editing__view">
         <input type="checkbox"
                className="toggle"
                defaultChecked={this.props.isCompleted}

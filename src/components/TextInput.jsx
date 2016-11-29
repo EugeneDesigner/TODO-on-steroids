@@ -42,7 +42,7 @@ export default class TextInput extends Component {
 
   render() {
     return (
-          <input className="edit"
+          <input className="editing__edit"
                   autoFocus={true}
                   type="text"
                   value={this.state.value}

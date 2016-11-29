@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import reducer from './reducers/reducer'
 import { Router, browserHistory } from 'react-router'
 import routes from './routes'
-import './index.css'
+import './styles/index.scss'
 
 
 const initialState = fromJS(window.__INITIAL_STATE__) || Map()

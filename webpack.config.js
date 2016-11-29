@@ -1,6 +1,9 @@
 const webpack = require('webpack')
 const path    = require('path')
 const ExtractTextPlugin  = require('extract-text-webpack-plugin')
+const autoprefixer       = require('autoprefixer')
+const precss             = require('precss')
+const stylelint          = require('stylelint')
 
 
 const publicPath       = '/public/assets'
@@ -56,12 +59,13 @@ module.exports = {
         loader: 'babel'
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-      }
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader?sourceMap&importLoaders=1', 'postcss-loader', 'sass-loader']
+      },
+
     ]
   },
-
+  postcss: () => [precss, stylelint, autoprefixer],
   plugins,
   devServer: {
    headers: { 'Access-Control-Allow-Origin': '*' }

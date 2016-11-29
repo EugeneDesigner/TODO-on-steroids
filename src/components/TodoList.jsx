@@ -20,11 +20,14 @@ export default class TodoList extends Component {
   isCompleted(item) {
     return item.get('status') === 'completed'
   }
+
+
   render() {
     console.log(this.getItems(), this.props.todos)
     return (
-    <section className="main">
-      <ul className="todo-list">
+    <section className="todo__main">
+      {this.getItems() ?
+      <ul className="todo__main__list">
         {this.getItems().map(item =>
           <TodoItem key={item.get('text')}
                     text={item.get('text')}
@@ -37,7 +40,7 @@ export default class TodoList extends Component {
                     deleteItem={this.props.deleteItem}
                     editItem={this.props.editItem}/>
         )}
-      </ul>
+      </ul> : null}
     </section>
   )
   }
