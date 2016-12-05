@@ -6,7 +6,7 @@ const precss             = require('precss')
 const stylelint          = require('stylelint')
 
 
-const publicPath       = '/public/assets'
+const publicPath       = 'http://localhost:8050/public/assets/'
 let cssName            = process.env.NODE_ENV === 'production' ? 'styles-[hash].css' : 'styles.css'
 let jsName             = process.env.NODE_ENV === 'production' ? 'bundle-[hash].js' : 'bundle.js'
 
@@ -60,15 +60,23 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader?sourceMap&importLoaders=1', 'postcss-loader', 'sass-loader']
+        loaders: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader']
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=[name].[ext]',
+          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      }
 
     ]
   },
   postcss: () => [precss, stylelint, autoprefixer],
   plugins,
   devServer: {
-   headers: { 'Access-Control-Allow-Origin': '*' }
+   headers: { 'Access-Control-Allow-Origin': '*' },
+   historyApiFallback: true,
    },
 
   devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : null

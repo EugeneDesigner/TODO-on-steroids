@@ -9,9 +9,11 @@ export default class Header extends Component {
 
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.handleKeyPress       = this.handleKeyPress.bind(this)
+    this.changePlaceholder    = this.changePlaceholder.bind(this)
   }
 
   handleKeyPress(e) {
+
     if (e.key === 'Enter' && this.refs.addTodoInput.value !== '') {
       return this.props.addItem(
         this.refs.addTodoInput.value
@@ -19,15 +21,27 @@ export default class Header extends Component {
     }
   }
 
+  changePlaceholder(e) {
+    let text = this.refs.addTodoInput
+      if (e.type == 'focus') {
+          text.placeholder = 'here we go, yes!'
+      } else if (e.type == 'blur' && text.placeholder === 'here we go, yes!') {
+        text.placeholder = 'commoooon'
+      }
+
+  }
+
   render() {
     return (
       <header className="todo__header">
-      <h1>Stuff to do</h1>
+      <h1>Plan Me</h1>
       <input className="todo__new"
              ref="addTodoInput"
              autoFocus
              autoComplete="off"
-             placeholder="What needs to be done?"
+             onFocus={this.changePlaceholder}
+             onBlur={this.changePlaceholder}
+             placeholder="Any tasks, boss?"
              onKeyPress = {this.handleKeyPress} />
       </header>
     )

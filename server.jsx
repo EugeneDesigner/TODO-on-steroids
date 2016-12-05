@@ -7,19 +7,17 @@ import routes                    from './src/routes'
 import { Provider }              from 'react-redux'
 import configureStore            from './src/redux/configureStore'
 import path                      from 'path'
+import cookieParser              from 'cookie-parser'
 
 
 const app = express()
 
-
-app.use( (req, res) => {
+app.use(cookieParser())
+app.use('/*', (req, res) => {
     const location = createLocation(req.url)
     const store = configureStore()
-
-
     const state = store.getState()
-
-    match({ routes: routes, location }, (err, redirectLocation, renderProps) => {
+    match({ routes, location }, (err, redirectLocation, renderProps) => {
     if (err) {
       console.error(err)
       return res.status(500).end('Internal server error')
@@ -34,9 +32,11 @@ app.use( (req, res) => {
 
     res.send(renderPage(componentHTML, state))
 
-
   })
+
 })
+
+
 
 const assetUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:8050' : '/'
 

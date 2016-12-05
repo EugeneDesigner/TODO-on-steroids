@@ -23,7 +23,7 @@ export default class TodoList extends Component {
 
 
   render() {
-    console.log(this.getItems(), this.props.todos)
+
     return (
     <section className="todo__main">
       {this.getItems() ?

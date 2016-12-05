@@ -1,5 +1,7 @@
+@import "./normalize.scss";
 @import "./todo.scss";
 @import "./reaction.scss";
+@import './signin.scss';
 
 html,
 body {
@@ -13,28 +15,38 @@ body {
 	line-height: 1.4em;
 
 	color: #4d4d4d;
-
+	background: linear-gradient(to left, #8e9eab , #eef2f3);
 	font-weight: 300;
 	max-width: 1500px;
 
+
+	.main-container {
+		display: flex;
+		width: 100%;
+
+	}
 	.app-container {
 		display: flex;
+		position: relative;
 		flex-direction: row;
 		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
 		margin: 0 auto;
-		width: 98%;
-		height: 100vh;
+		width: 100%;
+
 
 		& > section {
-			flex: 1;
-			max-height: 300px;
-			max-width: 49%;
+			flex: 1 0 49%;
+			margin-left: 50px;
 			min-width: 400px;
+			max-height: auto;
 		}
 
 	}
 
 }
+
 
 
 button {
@@ -63,8 +75,69 @@ button {
 
 
 
+nav {
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	background-color: #fff;
+	border-bottom-left-radius: 15px;
+	z-index: 10;
+
+	.links-holder {
+		padding: 10px;
+		display: inline-block;
+		width: 130px;
+		overflow: hidden;
+		transition: all .1s ease-in-out;
 
 
+		.second, .first {
+			position: absolute;
+			width: 200px;
+			left: 0;
+			transition: all .2s ease-in-out;
+		}
+
+		.second {
+				transform: translateY(30px);
+		}
+
+		.first {
+				transform: translateY(0px);
+			}
+
+
+
+		&:hover .second {
+			transform: translateY(0px);
+		}
+
+		&:hover .first {
+			transform: translateY(-50px);
+		}
+
+
+
+	}
+
+}
+
+
+
+.navigation {
+  color: #000;
+  text-decoration: none;
+	padding: 4px;
+	position: relative;
+	overflow: hidden;
+
+
+  &:focus, &:active {
+    color: #000;
+
+  }
+}
 
 
 
