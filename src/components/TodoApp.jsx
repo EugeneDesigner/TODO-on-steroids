@@ -8,7 +8,7 @@ import DevTools                       from './DevTools'
 import Background                     from './Background'
 import * as actionCreators            from '../actions/action_creators'
 import { Link }                       from 'react-router'
-
+import { fromJS }                     from 'Immutable'
 
 export class TodoApp extends Component {
   constructor(props) {
@@ -26,8 +26,10 @@ export class TodoApp extends Component {
   }
   getActiveItems() {
     if (this.props.todos) {
+      
       const activeItems = this.props.todos.filter(
         (item) => item.get('status') === 'active'
+
       )
       return activeItems.size
     }
@@ -73,10 +75,12 @@ export class TodoApp extends Component {
 
 
   render() {
-    console.log(this.getActiveItems())
+
+    console.log(...this.props)
+
     return (
       <div className="app-container">
-      
+
         <section className="todoapp">
 
           <TodoHeader addItem = {this.props.addItem}/>
@@ -85,6 +89,7 @@ export class TodoApp extends Component {
                       filter={this.props.filter}
                       getActiveItems={this.getActiveItems()}
                       clearCompleted={this.props.clearCompleted}/>
+        <DevTools/>
         </section>
         <section className="reaction">
           <div className="reaction__icon" onMouseEnter={(e) => this.iconColor(e)} onMouseLeave={(e) => this.iconColor(e)} onClick={()=> this.rotateIcon()}><Background height="85px" width="85px"  viewBox="0 0 15 15" name="icon" /></div>

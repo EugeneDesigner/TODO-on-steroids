@@ -17,6 +17,7 @@ app.use('/*', (req, res) => {
     const location = createLocation(req.url)
     const store = configureStore()
     const state = store.getState()
+    console.log(state)
     match({ routes, location }, (err, redirectLocation, renderProps) => {
     if (err) {
       console.error(err)

@@ -1,4 +1,5 @@
 import {Map} from 'immutable'
+import { v4 } from 'node-uuid'
 
 function setState(state, newState) {
   return state.merge(newState)
@@ -60,7 +61,7 @@ function clearCompleted(state) {
 }
 
 function addItem(state, text) {
-  const itemId = state.get('todos').reduce((maxId, item) => Math.max(maxId, item.get('id')), 0) + 1
+  const itemId = v4()
   const newItem = Map({id: itemId, text: text, status: 'active'})
   return state.update('todos', (todos) => todos.push(newItem))
 }

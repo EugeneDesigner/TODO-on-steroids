@@ -11,6 +11,7 @@ export default class TodoList extends Component {
 
   getItems() {
     if (this.props.todos) {
+
       return this.props.todos.filter(
         (item) => this.props.filter === 'all' || item.get('status') === this.props.filter
       )
@@ -23,13 +24,13 @@ export default class TodoList extends Component {
 
 
   render() {
-
+    console.log(this.getItems())
     return (
     <section className="todo__main">
       {this.getItems() ?
       <ul className="todo__main__list">
         {this.getItems().map(item =>
-          <TodoItem key={item.get('text')}
+          <TodoItem key={item.get('id')}
                     text={item.get('text')}
                     id={item.get('id')}
                     isCompleted={this.isCompleted(item)}

@@ -72,13 +72,13 @@
       @extend .placeholder;
     }
     &:-moz-placeholder {
-        color:    yellow;
+        color:    #000;
     }
     &::-moz-placeholder {
-        color:    yellow;
+        color:    #000;
     }
     &:-ms-input-placeholder {
-        color:    yellow;
+        color:    #000;
     }
   }
 }

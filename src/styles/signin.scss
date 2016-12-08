@@ -1,3 +1,16 @@
+
+$colors:
+  0 #4c5154 #ffffff,
+  1 lighten(#4c5154, 10%) darken(#ffffff, 10%),
+  2 lighten(#4c5154, 20%) darken(#ffffff, 10%),
+  3 lighten(#4c5154, 30%) darken(#ffffff, 10%),
+  4 lighten(#4c5154, 40%) darken(#ffffff, 10%),
+  5 lighten(#4c5154, 50%) darken(#ffffff, 50%),
+  6 lighten(#4c5154, 60%) darken(#ffffff, 80%),
+  7 lighten(#4c5154, 70%) darken(#ffffff, 90%);
+
+
+
 .organizer {
   margin-top: 50px;
   width: 100%;
@@ -17,19 +30,47 @@
   box-shadow: 20px 20px 30px 5px rgba(0,0,0,0.15);
 
 
+
+
+
   li {
     list-style: none;
-    border-radius: inherit;
+
     padding: 50px;
     text-align: center;
     transition: all .1s ease-out;
     cursor: grab;
     user-select: none;
+    transition: all .2s ease-in-out;
+    transform: rotateY(0px);
+
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
 
     &:hover {
-      background-color: yellow;
+      transform: rotateY(10px);
+    }
+
+    &:active, &:focus {
+      background-color: #fff;
+      color: #000;
     }
   }
+
+  @each $i in $colors {
+    .element-#{nth($i, 1)} {
+      background-color: nth($i,2);
+      color: nth($i,3);
+    }
+  }
+
 }
 
 .organizer__headline {

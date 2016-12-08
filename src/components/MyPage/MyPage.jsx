@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import {connect}                      from 'react-redux'
 import DevTools                       from '../DevTools'
 import {Link}                           from 'react-router'
-
+import Container                      from './Container'
+import {toJS}                           from 'Immutable'
 
 export class MyPage extends Component {
   constructor(props) {
@@ -23,8 +24,9 @@ getActive() {
 
 
   render() {
-    console.log(this.props.todos)
+    console.log(this.getActive().toJS())
     return (
+
       <section className="organizer">
 
           <h1 className="organizer__headline">Rank your tasks</h1>
@@ -39,6 +41,8 @@ getActive() {
         : <ul className="organizer__priorityList"><li>Here your actual tasks will be displayed</li></ul>
 
       }
+
+      <Container cards={this.getActive().toJS()}/>
     </section>
 
 

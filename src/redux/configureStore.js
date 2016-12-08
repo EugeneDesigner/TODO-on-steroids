@@ -13,6 +13,7 @@ export default function (initialState = Map()) {
     )
   )
 
+
   return store
 
 }
