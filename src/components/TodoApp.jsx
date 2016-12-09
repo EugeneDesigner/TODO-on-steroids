@@ -9,6 +9,7 @@ import Background                     from './Background'
 import * as actionCreators            from '../actions/action_creators'
 import { Link }                       from 'react-router'
 import { fromJS }                     from 'Immutable'
+import FlashMessagesList              from './flash/FlashMessagesList'
 
 export class TodoApp extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export class TodoApp extends Component {
   }
   getActiveItems() {
     if (this.props.todos) {
-      
+
       const activeItems = this.props.todos.filter(
         (item) => item.get('status') === 'active'
 

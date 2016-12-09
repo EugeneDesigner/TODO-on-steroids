@@ -8,11 +8,20 @@ import { Provider }              from 'react-redux'
 import configureStore            from './src/redux/configureStore'
 import path                      from 'path'
 import cookieParser              from 'cookie-parser'
+import bodyParser                from 'body-parser'
 
+import users from './routes/users'
 
 const app = express()
 
+
+
+
 app.use(cookieParser())
+
+app.use(bodyParser.json())
+app.use('/api/users', users)
+
 app.use('/*', (req, res) => {
     const location = createLocation(req.url)
     const store = configureStore()

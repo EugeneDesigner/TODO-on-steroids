@@ -31,7 +31,7 @@ export default class LoginForm extends Component {
     return (
       <form onSumbit={this.onSubmit}>
         <h1>Login</h1>
-        <TextFieldGroup
+        <input
           field="identifier"
           label="Username / Email"
           value={identifier}
@@ -39,7 +39,7 @@ export default class LoginForm extends Component {
           onChange={this.onChange}
           />
 
-          <TextFieldGroup
+          <input
             field="password"
             label="password"
             value={password}

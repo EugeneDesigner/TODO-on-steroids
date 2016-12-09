@@ -5,6 +5,7 @@ import {isUserSignedIn}   from './redux/models/user'
 import MyPageContainer from './components/MyPage'
 import EntryRoute from './components/EntryRoute'
 import LoginPage from './components/LoginPage'
+import SignupPage from './components/SignupPage'
 
 function requireAuth(nextState, transition, cb) {
   setTimeOut(() => {
@@ -23,6 +24,7 @@ const routes= (
     <Route component={TodoAppContainer} path="/main" />
     <Route component={MyPageContainer} path="/priorities"/>
     <Route component={LoginPage} path="/login"/>
+    <Route component={SignupPage} path="/signup"/>
   </Route>
 )
 
