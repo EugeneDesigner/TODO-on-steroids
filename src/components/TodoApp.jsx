@@ -77,7 +77,7 @@ export class TodoApp extends Component {
 
   render() {
 
-    console.log(...this.props)
+    console.log(...this.props.todos)
 
     return (
       <div className="app-container">
@@ -108,6 +108,7 @@ export class TodoApp extends Component {
 
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     todos: state.get('todos'),
     filter: state.get('filter')

@@ -4,7 +4,7 @@ import isEmpty   from 'lodash/isEmpty'
 export default function validateInput(data) {
   let errors = {}
   if (Validator.isEmpty(data.username)) {
-    errors.email = 'Name is required'
+    errors.username = 'Name is required'
   }
   if (Validator.isEmpty(data.email)) {
     errors.email = 'Email is required'
@@ -13,13 +13,13 @@ export default function validateInput(data) {
     errors.email = 'Email is invalid'
   }
   if (Validator.isEmpty(data.password)) {
-    errors.password = 'Email is required'
+    errors.password = 'Password is required'
   }
   if (!Validator.equals(data.password, data.passwordConfirmation)) {
     errors.passwordConfirmation = 'Passwords must match'
   }
   if (Validator.isEmpty(data.passwordConfirmation)) {
-    errors.passwordConfirmation = 'Email is required'
+    errors.passwordConfirmation = 'Password Confirmation is required'
   }
 
   console.log(errors)

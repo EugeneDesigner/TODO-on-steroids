@@ -11,6 +11,7 @@ import cookieParser              from 'cookie-parser'
 import bodyParser                from 'body-parser'
 
 import users from './routes/users'
+import auth from './routes/auth'
 
 const app = express()
 
@@ -21,6 +22,8 @@ app.use(cookieParser())
 
 app.use(bodyParser.json())
 app.use('/api/users', users)
+app.use('/api/auth', auth)
+
 
 app.use('/*', (req, res) => {
     const location = createLocation(req.url)

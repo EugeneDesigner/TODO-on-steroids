@@ -21,10 +21,6 @@ function toggleComplete(state, itemId) {
   return state.update('todos', todos => todos.set(itemIndex, updatedItem))
 }
 
-function changeFilter(state, filter) {
-  return state.set('filter', filter)
-
-}
 
 function editItem(state, itemId) {
   const itemIndex = findItemIndex(state, itemId)
@@ -53,6 +49,7 @@ function doneEditing(state, itemId, newText) {
 }
 
 function clearCompleted(state) {
+  console.log(fromJS(state.get('todos[0]')))
   return state.update('todos',
     (todos) => todos.filterNot(
       (item) => item.get('status') === 'completed'
@@ -80,8 +77,6 @@ export default function(state = Map(), action) {
       return setState(state, action.state)
     case 'TOGGLE_COMPLETE':
       return toggleComplete(state, action.itemId)
-    case 'CHANGE_FILTER':
-      return changeFilter(state, action.filter)
     case 'EDIT_ITEM':
       return editItem(state, action.itemId)
     case 'CANCEL_EDITING':

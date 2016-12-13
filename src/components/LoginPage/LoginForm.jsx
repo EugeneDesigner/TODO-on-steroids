@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import TextFieldGroup from '../../common/TextFieldGroup'
+import validateInput from '../../../shared/validations/login'
+import {connect} from 'react-redux'
+import { login } from '../../actions/loginActions'
 
-
-
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props)
 
@@ -17,8 +19,25 @@ export default class LoginForm extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
+  isValid() {
+    const { errors, isValid } = validateInput(this.state)
+
+    if (!isValid) {
+      this.setState({ errors })
+    }
+
+    return isValid
+  }
+
   onSubmit(e) {
     e.preventDefault()
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true })
+      this.props.login(this.state).then(
+        (res) => this.context.router.push('/main'),
+        (err) => this.setState({ errors: err.response.data.errors, isLoading: false})
+      )
+    }
   }
 
   onChange(e) {
@@ -29,9 +48,11 @@ export default class LoginForm extends Component {
   render() {
     const {errors, identifier, password, isLoading } = this.state
     return (
-      <form onSumbit={this.onSubmit}>
+      <form onSubmit={this.onSubmit}>
         <h1>Login</h1>
-        <input
+
+        { errors.form && <div className="alert__danger">{errors.form}</div>}
+        <TextFieldGroup
           field="identifier"
           label="Username / Email"
           value={identifier}
@@ -39,16 +60,26 @@ export default class LoginForm extends Component {
           onChange={this.onChange}
           />
 
-          <input
+          <TextFieldGroup
             field="password"
-            label="password"
+            label="Password"
             value={password}
             error={errors.password}
             onChange={this.onChange}
             type="password"
             />
-          <div><button disabled={isLoading}>Login</button></div>
+          <div className="form__group"><button disabled={isLoading}>Login</button></div>
       </form>
     )
   }
 }
+
+LoginForm.propTypes = {
+  login:  PropTypes.func.isRequired
+}
+
+LoginForm.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+export default connect(null, { login })(LoginForm)

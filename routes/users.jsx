@@ -1,21 +1,59 @@
 import express from 'express'
-import validateInput from '../shared/validations/signup'
+import commonValidations from '../shared/validations/signup'
+import bcrypt from 'bcrypt'
+import Promise from 'bluebird'
+import isEmpty from 'lodash/isEmpty'
 
+import User from '../models/user'
 
 let router = express.Router()
 
+function validateInput(data, otherValidations) {
+  let { error } = otherValidations(data)
+  return Promise.all([
+    User.where({ email: data.email }).fetch().then(user => {
+      if (user) { errors.email = 'There is already a user with such email'}
+    }),
+    User.where({ username: data.username}).fetch().then(user => {
+      if (user) { errors.username = 'There is already a user with such username'}
+    })
+  ]).then(() => {
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    }
+  })
+
+}
+
+router.get('/:identifier', (req,res) => {
+  User.query({
+    select: ['username', 'email' ],
+    where: { email: req.params.identifier},
+    orWhere: { username: req.params.identifier}
+  }).fetch().then( user => {
+    res.json({ user })
+  })
+})
 
 router.post('/', (req, res) => {
-  setTimeout(() => {
-  const { errors, isValid } = validateInput(req.body)
+  validateInput(req.body, commonValidations).then(({ errors, isValid }) => {
+    if (isValid) {
+      const { username, password, email } = req.body
+      const password_digest = bcrypt.hashSync(password, 10)
 
-  if (isValid) {
-    res.json({ success: true })
-  } else {
-    res.status(400).json(errors)
-  }
-    
-  }, 5000)
+      User.forge({
+        username, email, password_digest
+      }, {hasTimestamps: true }).save()
+      .then(user => res.json({ success: true }))
+      .catch(err => res.status(500).json({ error: err}))
+
+    } else {
+      res.status(400).json(errors)
+    }
+  })
+
+
 })
 
 

@@ -4,12 +4,14 @@ import {fromJS, Map, List} from 'immutable'
 import configureStore from './redux/configureStore'
 import {loadState, saveState} from './redux/localStorage'
 import {Provider} from 'react-redux'
-import reducer from './reducers/reducer'
 import { Router, browserHistory } from 'react-router'
 import routes from './routes'
 import './styles/index.scss'
 import throttle from 'lodash/throttle'
-
+import setAuthorizationToken from '../utils/setAuthorizationToken'
+import jwtDecode from 'jwt-decode'
+import {setCurrentUser} from './actions/loginActions'
+import authenticate from '../utils/authenticate'
 
 
   const initialState = fromJS(window.__INITIAL_STATE__) || fromJS(loadState())
@@ -39,6 +41,15 @@ store.subscribe(throttle(() => {
     filter: 'all'
   })
 }, 1000))
+
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken)
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
+
+}
+
+
+
 
 
 

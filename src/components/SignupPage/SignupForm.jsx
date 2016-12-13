@@ -15,11 +15,13 @@ export default class SignupForm extends Component {
       password: '',
       passwordConfirmation: '',
       errors: {},
-      isLoading: false
+      isLoading: false,
+      invalid: false
     }
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.checkUserExists = this.checkUserExists.bind(this)
   }
 
 onChange(e) {
@@ -37,27 +39,50 @@ isValid() {
 
   return isValid
 }
+
+
+checkUserExists(e) {
+  const field = e.target.name,
+        val = e.target.value;
+  if (val !== '') {
+    this.props.isUserExists(val).then(res => {
+        if (res.data.user) {
+          erros[field] = 'There is user with such ' + field
+          let invalid = true
+        } else {
+          errors[field] = ''
+          invalid = false
+        }
+        this.setState({ errors, invalid })
+    })
+  }
+
+}
+
+
 onSubmit(e) {
   e.preventDefault()
   this.setState({ errors: {}, isLoading: true })
 
 
   if (this.isValid()) {
+
     this.props.userSignupRequest(this.state).then(
       () => {
         this.props.addFlashMessage({
           type: 'success',
           text: 'You signed up successfully'
         })
-        this.context.router.push('/')
+        this.context.router.push('/main')
       },
-      ({ data }) => this.setState({ errors: data, isLoading: false })
+      ({ error }) => this.setState({ errors: error.response.data, isLoading: false })
     )
 
   }
 }
 
 render() {
+
       const { errors } = this.state
   return (
     <form onSubmit={this.onSubmit}>
@@ -65,6 +90,7 @@ render() {
         error = {errors.username}
         label = "Username"
         onChange = {this.onChange}
+        checkUserExists = {this.checkUserExists}
         value = {this.state.username}
         field = "username"
         />
@@ -72,6 +98,7 @@ render() {
         error = {errors.email}
         label = "Email"
         onChange = {this.onChange}
+        checkUserExists = {this.checkUserExists}
         value = {this.state.email}
         field = "email"
         type = "email"
@@ -95,7 +122,7 @@ render() {
 
 
       <div className="form__group">
-        <button disabled={this.state.isLoading} className="form__button" type="submit">Sign up </button>
+        <button disabled={this.state.isLoading || this.state.invalid} className="form__button" type="submit">Sign up </button>
       </div>
 
 
@@ -107,10 +134,11 @@ render() {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 }
