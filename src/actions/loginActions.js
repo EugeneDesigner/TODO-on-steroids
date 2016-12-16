@@ -6,7 +6,7 @@ import * as types from '../constants/types.js'
 
 export function setCurrentUser(user) {
   return {
-    type: type.SET_CURRENT_USER,
+    type: types.SET_CURRENT_USER,
     user
   }
 }

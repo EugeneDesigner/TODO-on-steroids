@@ -12,6 +12,11 @@ function findItemIndex(state, itemId) {
 }
 
 
+function changeFilter(state, filter) {
+  return state.set('filter', filter)
+}
+
+
 function toggleComplete(state, itemId) {
   const itemIndex = findItemIndex(state, itemId)
   const updatedItem = state.get('todos')
@@ -49,7 +54,7 @@ function doneEditing(state, itemId, newText) {
 }
 
 function clearCompleted(state) {
-  console.log(fromJS(state.get('todos[0]')))
+
   return state.update('todos',
     (todos) => todos.filterNot(
       (item) => item.get('status') === 'completed'
@@ -59,6 +64,7 @@ function clearCompleted(state) {
 
 function addItem(state, text) {
   const itemId = v4()
+  console.log(state)
   const newItem = Map({id: itemId, text: text, status: 'active'})
   return state.update('todos', (todos) => todos.push(newItem))
 }
@@ -89,6 +95,8 @@ export default function(state = Map(), action) {
       return addItem(state, action.text)
     case 'DELETE_ITEM':
       return deleteItem(state, action.itemId)
+    case 'CHANGE_FILTER':
+      return changeFilter(state, action.filter)
   }
   return state
 }

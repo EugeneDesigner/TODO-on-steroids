@@ -72,7 +72,7 @@ module.exports = {
 
     ]
   },
-  postcss: () => [precss, stylelint, autoprefixer],
+  postcss: () => [precss, autoprefixer],
   plugins,
   devServer: {
    headers: { 'Access-Control-Allow-Origin': '*' },

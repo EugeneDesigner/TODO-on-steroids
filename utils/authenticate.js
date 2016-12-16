@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { addFlashMessage} from '../src/actions/flashMessages'
-
+import { connect } from 'react-redux'
 
 export default function(Comp) {
   class Authenticate extends Component {
@@ -33,7 +33,7 @@ export default function(Comp) {
   }
 
   Authenticate.contextTypes = {
-    isAuthenticated: state.auth.isAuthenticated
+    router: PropTypes.object.isRequired
   }
   function mapStateToProps(state) {
     return {

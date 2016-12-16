@@ -44,11 +44,14 @@ isValid() {
 checkUserExists(e) {
   const field = e.target.name,
         val = e.target.value;
+  let errors = this.state.errors,
+     invalid = this.state.invalid;
   if (val !== '') {
     this.props.isUserExists(val).then(res => {
         if (res.data.user) {
-          erros[field] = 'There is user with such ' + field
-          let invalid = true
+          console.log(field)
+          errors[field] = 'There is user with such ' + field
+          invalid = true
         } else {
           errors[field] = ''
           invalid = false
@@ -86,9 +89,10 @@ render() {
       const { errors } = this.state
   return (
     <form onSubmit={this.onSubmit}>
+      <h1>Sign Up</h1>
       <TextFieldGroup
         error = {errors.username}
-        label = "Username"
+        placeholder = "Username"
         onChange = {this.onChange}
         checkUserExists = {this.checkUserExists}
         value = {this.state.username}
@@ -96,7 +100,7 @@ render() {
         />
       <TextFieldGroup
         error = {errors.email}
-        label = "Email"
+        placeholder = "Email"
         onChange = {this.onChange}
         checkUserExists = {this.checkUserExists}
         value = {this.state.email}
@@ -105,7 +109,7 @@ render() {
         />
         <TextFieldGroup
           error = {errors.password}
-          label = "Password"
+          placeholder = "Password"
           onChange = {this.onChange}
           value = {this.state.password}
           field = "password"
@@ -113,7 +117,7 @@ render() {
           />
         <TextFieldGroup
           error = {errors.passwordConfirmation}
-          label = "Password Confirmation"
+          placeholder = "Password Confirmation"
           onChange = {this.onChange}
           value = {this.state.passwordConfirmation}
           field = "passwordConfirmation"

@@ -7,7 +7,7 @@ import {Map} from 'immutable'
 
 
 export default function (initialState = Map()) {
-  const store = createStore(rootReducer, initialState, compose(
+  const store = createStore(rootReducer,  compose(
     applyMiddleware(thunk),
     DevTools.instrument()
     )

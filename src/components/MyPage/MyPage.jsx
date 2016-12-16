@@ -52,7 +52,7 @@ getActive() {
 
 function mapStateToProps(state) {
   return {
-    todos: state.get('todos')
+    todos: state.todos.get('todos')
   }
 }
 

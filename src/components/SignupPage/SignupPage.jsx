@@ -6,14 +6,13 @@ import { addFlashMessage } from '../../actions/flashMessages'
 
 class SignupPage extends Component {
 render() {
+
   const { userSignupRequest, addFlashMessage, isUserExists } = this.props
   return (
-    <div className="signup">
-        <div>
-          <h1>Sign Up</h1>
+    <section >
+
           <SignupForm userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage} isUserExists={isUserExists}/>
-        </div>
-    </div>
+    </section>
   )
 }
 }

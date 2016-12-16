@@ -26,8 +26,8 @@ export class TodoApp extends Component {
     this.changeDrawing()
   }
   getActiveItems() {
+    console.log(this.props.todos)
     if (this.props.todos) {
-
       const activeItems = this.props.todos.filter(
         (item) => item.get('status') === 'active'
 
@@ -61,7 +61,7 @@ export class TodoApp extends Component {
 
 
   iconColor(e) {
-    console.log(e.type)
+
     if (e.type === 'mouseenter') {
       document.getElementById('icon-color').style.fill = "#ff61b8"
     } else {
@@ -77,8 +77,8 @@ export class TodoApp extends Component {
 
   render() {
 
-    console.log(...this.props.todos)
 
+    console.log(this.props.todos)
     return (
       <div className="app-container">
 
@@ -108,10 +108,10 @@ export class TodoApp extends Component {
 
 
 function mapStateToProps(state) {
-  console.log(state)
+
   return {
-    todos: state.get('todos'),
-    filter: state.get('filter')
+    todos: state.todos.get('todos'),
+    filter: state.todos.get('filter')
   }
 }
 

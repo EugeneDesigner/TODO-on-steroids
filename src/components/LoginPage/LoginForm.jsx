@@ -54,21 +54,23 @@ class LoginForm extends Component {
         { errors.form && <div className="alert__danger">{errors.form}</div>}
         <TextFieldGroup
           field="identifier"
-          label="Username / Email"
           value={identifier}
           error={errors.identifier}
           onChange={this.onChange}
+          placeholder='Username/Email'
           />
+
+
 
           <TextFieldGroup
             field="password"
-            label="Password"
             value={password}
             error={errors.password}
             onChange={this.onChange}
             type="password"
+            placeholder="Password"
             />
-          <div className="form__group"><button disabled={isLoading}>Login</button></div>
+          <div className="form__button"><button disabled={isLoading} type="submit">Login</button></div>
       </form>
     )
   }

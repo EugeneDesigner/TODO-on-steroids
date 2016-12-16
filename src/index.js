@@ -17,17 +17,18 @@ import authenticate from '../utils/authenticate'
   const initialState = fromJS(window.__INITIAL_STATE__) || fromJS(loadState())
 const store = configureStore(initialState)
 
-// store.dispatch({
-//   type: 'SET_STATE',
-//   state: {
-//     todos: [
-//       {id: 1, text: 'Shopping', status: 'active', editing: false},
-//       {id: 2, text: 'Go see Paul', status: 'active', editing: false},
-//       {id: 3, text: 'Finish work', status: 'active', editing: false},
-//     ],
-//   filter: 'all'
-//   }
-// })
+store.dispatch({
+  type: 'SET_STATE',
+  state: {
+    todos: [
+      {id: 1, text: 'Shopping', status: 'active', editing: false},
+      {id: 2, text: 'Go see Paul', status: 'active', editing: false},
+      {id: 3, text: 'Finish work', status: 'active', editing: false},
+    ],
+  filter: 'all'
+  }
+})
+
 
 
 
@@ -37,7 +38,7 @@ const store = configureStore(initialState)
 
 store.subscribe(throttle(() => {
   saveState({
-    todos: store.getState().get('todos'),
+    todos: store.getState().todos.get('todos'),
     filter: 'all'
   })
 }, 1000))
