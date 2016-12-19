@@ -4,6 +4,7 @@ import DevTools                       from '../DevTools'
 import {Link}                           from 'react-router'
 import Container                      from './Container'
 import {toJS}                           from 'Immutable'
+import Transition                       from 'react-addons-css-transition-group'
 
 export class MyPage extends Component {
   constructor(props) {
@@ -24,15 +25,20 @@ getActive() {
 
 
   render() {
-    console.log(this.getActive().toJS())
     return (
-
-      <section className="organizer">
-
+      <Transition
+        component="section"
+        className="organizer"
+        transitionName="form-animate"
+        transitionAppear={true}
+        transitionAppearTimeout={600}
+        transitionEnterTimeout={600}
+        transitionLeaveTimeout={600}
+        >
           <h1 className="organizer__headline">Rank your tasks</h1>
 
         {this.getActive() ?
-          <ul className="organizer__priorityList">
+          <ul key="3" className="organizer__priorityList">
           {this.getActive().map(item =>
             <li>{item.get('text')}</li>
           )}
@@ -43,7 +49,7 @@ getActive() {
       }
 
       <Container cards={this.getActive().toJS()}/>
-    </section>
+    </Transition>
 
 
     )

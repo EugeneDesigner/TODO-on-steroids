@@ -9,8 +9,10 @@ I decided to create a TODO-app to improve my coding skills (sometimes it is good
 * Isomorphic
 * React/Redux
 * Node
-* Bootstrap
-* Pug
-* PostCSS
+* ReactTransitionGroup
+* Drag and Drop
+* PostgreSQL
+* Immutable, Lodash
+* SCSS, PostCSS
 
 Check more of my work on [My Website](http://www.eugenedeveloper.me)

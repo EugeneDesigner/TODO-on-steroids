@@ -1,3 +1,17 @@
+$error: #f92868;
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 60px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
 .input-form {
   display: flex;
   height: 100%;
@@ -12,14 +26,26 @@
 .input-form__links {
   background-color: #fff;
   border-radius: 15px;
+  width: 200px;
+
 }
 
 .input-form__links > a {
   display: inline-block;
+  text-align: center;
+  width: 50%;
+  box-sizing: border-box;
   padding: 8px 15px;
-  color: #fff;
+  color: #000;
   text-decoration: none;
-  border-radius: 15px 0 0 15px;
+  border-radius: 0 15px 15px 0;
+  transition: all 1s cubic-bezier(0,1.01,.83,.67);
+  &:first-child {
+    border-radius: 15px 0 0 15px;
+  }
+
+
+
 
 
 }
@@ -28,7 +54,9 @@ form {
    max-width: 800px;
    min-width: 300px;
    text-align: center;
-   margin: 20px auto;
+   margin: 50px auto;
+   display: flex;
+   flex-flow: column nowrap;
 
 
   input {
@@ -50,7 +78,7 @@ form {
 
   button[type="submit"] {
      color: white;
-     background: #f92868;
+     background: $error;
      cursor: pointer;
      @extend input;
      transition: all .1s ease-in;
@@ -61,5 +89,32 @@ form {
        border-radius: 0;
     }
   }
+
+}
+
+
+.has__error {
+  input {
+    border: 1px solid red;
+  }
+
+  .form__errors {
+    background-color: #fff;
+    margin-top: 3px;
+    padding: 10px 4px;
+    border-radius: 2px;
+    background-color: $error;
+    color: #fff;
+    letter-spacing: .1em;
+    align-self: center;
+     -webkit-font-smoothing: antialiased;
+     font-weight: bold;
+
+  }
+}
+
+.form-animate-appear {
+  opacity: 0;
+  animation: slideUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 
 }

@@ -12,7 +12,7 @@ const TextFieldGroup = ({ field, value, error, type, onChange, checkUserExists, 
         name= {field}
         placeholder= {placeholder}
         className="form__control"/>
-        {error && <span className="form__erros">{error}</span>}
+        {error && <div className="form__errors">{error}</div>}
     </div>
   )
 }

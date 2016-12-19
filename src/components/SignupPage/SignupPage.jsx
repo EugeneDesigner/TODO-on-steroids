@@ -3,16 +3,22 @@ import SignupForm from './SignupForm'
 import { connect } from 'react-redux'
 import { userSignupRequest, isUserExists } from '../../actions/signupActions'
 import { addFlashMessage } from '../../actions/flashMessages'
+import Transition from 'react-addons-css-transition-group'
 
 class SignupPage extends Component {
 render() {
 
   const { userSignupRequest, addFlashMessage, isUserExists } = this.props
   return (
-    <section >
+    <Transition
+      component="section"
+      transitionName="form-animate"
+      transitionAppear={true}
+      transitionAppearTimeout={600}
 
-          <SignupForm userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage} isUserExists={isUserExists}/>
-    </section>
+      >
+      <SignupForm userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage} isUserExists={isUserExists}  key="1"/>
+    </Transition>
   )
 }
 }

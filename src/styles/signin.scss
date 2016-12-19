@@ -1,13 +1,14 @@
-
+$red: #39393a;
+$white: #ffffff;
 $colors:
-  0 #4c5154 #ffffff,
-  1 lighten(#4c5154, 10%) darken(#ffffff, 10%),
-  2 lighten(#4c5154, 20%) darken(#ffffff, 10%),
-  3 lighten(#4c5154, 30%) darken(#ffffff, 10%),
-  4 lighten(#4c5154, 40%) darken(#ffffff, 10%),
-  5 lighten(#4c5154, 50%) darken(#ffffff, 50%),
-  6 lighten(#4c5154, 60%) darken(#ffffff, 80%),
-  7 lighten(#4c5154, 70%) darken(#ffffff, 90%);
+  0 $red #ffffff,
+  1 lighten($red, 10%) darken(#ffffff, 10%),
+  2 lighten($red, 20%) darken(#ffffff, 10%),
+  3 lighten($red, 30%) darken(#ffffff, 10%),
+  4 lighten($red, 40%) darken(#ffffff, 10%),
+  5 lighten($red, 50%) darken(#ffffff, 50%),
+  6 lighten($red, 60%) darken(#ffffff, 80%),
+  7 lighten($red, 70%) darken(#ffffff, 90%);
 
 
 
@@ -71,11 +72,4 @@ $colors:
     }
   }
 
-}
-
-.organizer__headline {
-
-  display: inline-block;
-  width: 100%;
-  text-align: center;
 }

@@ -583,9 +583,9 @@ export default class Background extends Component {
     )
     case 'icon':
       return (
-      <g >
+      <g id="icon">
         <ellipse id="icon-color" fill="#4C4A4B" cx="7.508" cy="7.5" rx="7.492" ry="7.5"/>
-        <g>
+        <g id="icon-emblem">
         	<path fill="#FFFFFF" d="M9.847,6.865C9.383,6.586,7.582,6.761,7.582,6.761S5.78,6.586,5.317,6.865
         		c-0.463,0.278-0.666,3.228,0.49,3.639c0,0,1.006,0.355,1.775,0.355c0.769,0,1.775-0.355,1.775-0.355
         		C10.513,10.092,10.31,7.143,9.847,6.865z"/>

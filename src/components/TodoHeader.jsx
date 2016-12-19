@@ -34,7 +34,7 @@ export default class Header extends Component {
   render() {
     return (
       <header className="todo__header">
-      <h1>Plan Me</h1>
+      <h1>Do Today</h1>
       <input className="todo__new"
              ref="addTodoInput"
              autoFocus

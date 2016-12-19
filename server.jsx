@@ -60,7 +60,7 @@ function renderPage(html, initialState) {
     <head>
       <meta charset="UTF-8">
       <title>Things to do</title>
-      <link rel="stylesheet" href="${assetUrl}/public/assets/styles.css">
+      <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     </head>
     <body>
       <div id="app">${html}</div>

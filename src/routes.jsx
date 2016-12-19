@@ -14,9 +14,10 @@ const routes= (
 
   <Route path="/" component={EntryRoute}>
 
-    <Route component={TodoAppContainer} path="/main" />
+    <IndexRoute component={TodoAppContainer} />
     <Route component={MyPageContainer} path="/priorities"/>
     <Route component={Register} path='/register'>
+      <IndexRedirect to="signup" />
       <Route component={LoginPage} path="login"/>
       <Route component={SignupPage} path="signup"/>
     </Route>
