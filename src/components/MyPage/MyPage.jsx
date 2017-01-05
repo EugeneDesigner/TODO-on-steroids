@@ -3,7 +3,7 @@ import {connect}                      from 'react-redux'
 import DevTools                       from '../DevTools'
 import {Link}                           from 'react-router'
 import Container                      from './Container'
-import {toJS}                           from 'Immutable'
+import {toJS}                           from 'immutable'
 import Transition                       from 'react-addons-css-transition-group'
 
 export class MyPage extends Component {
@@ -39,8 +39,8 @@ getActive() {
 
         {this.getActive() ?
           <ul key="3" className="organizer__priorityList">
-          {this.getActive().map(item =>
-            <li>{item.get('text')}</li>
+          {this.getActive().map((item, key) =>
+            <li key={key}>{item.get('text')}</li>
           )}
           </ul>
 

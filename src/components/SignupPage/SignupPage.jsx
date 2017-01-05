@@ -15,6 +15,8 @@ render() {
       transitionName="form-animate"
       transitionAppear={true}
       transitionAppearTimeout={600}
+      transitionEnterTimeout={600}
+      transitionLeaveTimeout={600}
 
       >
       <SignupForm userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage} isUserExists={isUserExists}  key="1"/>

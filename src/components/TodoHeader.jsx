@@ -22,11 +22,11 @@ export default class Header extends Component {
   }
 
   changePlaceholder(e) {
-    let text = this.refs.addTodoInput
+    let text = document.getElementById('addTodoInput')
       if (e.type == 'focus') {
-          text.placeholder = 'here we go, yes!'
-      } else if (e.type == 'blur' && text.placeholder === 'here we go, yes!') {
-        text.placeholder = 'commoooon'
+          text.placeholder = 'Here we go, yes!'
+      } else if (e.type == 'blur') {
+          text.placeholder = 'Its ok, think carefully'
       }
 
   }
@@ -37,7 +37,7 @@ export default class Header extends Component {
       <h1>Do Today</h1>
       <input className="todo__new"
              ref="addTodoInput"
-             autoFocus
+             id="addTodoInput"
              autoComplete="off"
              onFocus={this.changePlaceholder}
              onBlur={this.changePlaceholder}

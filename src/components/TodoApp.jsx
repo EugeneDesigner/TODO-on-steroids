@@ -5,10 +5,10 @@ import TodoTools                      from './TodoTools'
 import {Footer}                       from './Footer'
 import {connect}                      from 'react-redux'
 import DevTools                       from './DevTools'
-import Background                     from './Background'
+import Background                     from '../common/Background'
 import * as actionCreators            from '../actions/action_creators'
 import { Link }                       from 'react-router'
-import { fromJS }                     from 'Immutable'
+import { fromJS }                     from 'immutable'
 import FlashMessagesList              from './flash/FlashMessagesList'
 import Transition                     from 'react-addons-css-transition-group'
 
@@ -28,7 +28,7 @@ export class TodoApp extends Component {
     this.changeDrawing()
   }
   getActiveItems() {
-    console.log(this.props.todos)
+    
     if (this.props.todos) {
       const activeItems = this.props.todos.filter(
         (item) => item.get('status') === 'active'

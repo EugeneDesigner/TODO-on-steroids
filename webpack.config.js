@@ -1,9 +1,10 @@
-const webpack = require('webpack')
-const path    = require('path')
+const webpack            = require('webpack')
+const path               = require('path')
 const ExtractTextPlugin  = require('extract-text-webpack-plugin')
 const autoprefixer       = require('autoprefixer')
 const precss             = require('precss')
 const stylelint          = require('stylelint')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 
 const publicPath       = 'http://localhost:8050/public/assets/'

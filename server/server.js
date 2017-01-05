@@ -3,15 +3,15 @@ import React                     from 'react'
 import { renderToString }        from 'react-dom/server'
 import { RouterContext, match }  from 'react-router'
 import { createLocation }        from 'history'
-import routes                    from './src/routes'
+import routes                    from '../src/routes'
 import { Provider }              from 'react-redux'
-import configureStore            from './src/redux/configureStore'
+import configureStore            from '../src/redux/configureStore'
 import path                      from 'path'
 import cookieParser              from 'cookie-parser'
 import bodyParser                from 'body-parser'
 
-import users from './routes/users'
-import auth from './routes/auth'
+import users from '../routes/users'
+import auth from '../routes/auth'
 
 const app = express()
 
@@ -63,7 +63,7 @@ function renderPage(html, initialState) {
       <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     </head>
     <body>
-      <div id="app">${html}</div>
+      <div id="app"><div>${html}</div></div>
       <script type="application/javascript" src="${assetUrl}/public/assets/bundle.js"></script>
       <script type="application/javascript">
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}

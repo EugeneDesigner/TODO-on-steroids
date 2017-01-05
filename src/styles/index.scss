@@ -1,14 +1,13 @@
 @import "./normalize.scss";
 @import "./todo.scss";
 @import "./reaction.scss";
-@import './signin.scss';
+@import './rank.scss';
 @import './form.scss';
 
 
 @keyframes changeColor {
 	0% {
 			background: #bdc3c7;
-
 	}
 	10% {
 			background: #3498db;
@@ -38,7 +37,7 @@
 		background: #ffe2cf;
 	}
 	100% {
-			background: #bdc3c7;
+		background: #bdc3c7;
 	}
 
 }
@@ -64,6 +63,7 @@ body {
 	h1 {
 		text-align: center;
 		font-size: 4em;
+		line-height: 1em;
 
 
 	}
@@ -90,9 +90,7 @@ body {
 
 		& > section {
 			flex: 1 0 40%;
-			margin: 100px 0 0 50px;
-			min-width: 400px;
-
+			margin-top: 100px;
 			max-height: auto;
 		}
 
@@ -132,7 +130,8 @@ nav {
 	position: fixed;
 	right: 0;
 	top: 0;
-
+	width: 100%;
+	max-width: 500px;
 	background-color: #fff;
 	border-bottom-left-radius: 15px;
 	z-index: 10;
@@ -140,20 +139,22 @@ nav {
 	.links-holder {
 		padding: 10px;
 		display: inline-block;
-		width: 130px;
+		width: 20%;
+
 		overflow: hidden;
 		transition: all .1s ease-in-out;
+		align-items: center;
 
 
 		.second, .first, .register {
 			position: absolute;
-			width: 200px;
+			width: 100px;
 			left: 0;
 			transition: all .2s ease-in-out;
 		}
 
 		.second {
-				transform: translateY(30px);
+				transform: translateY(50px);
 		}
 
 		.first {
@@ -200,23 +201,7 @@ nav {
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox
 */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	.toggle-all,
-	.todo__main__list li .toggle {
-		background: none;
-	}
 
-	.todo__main__list li .toggle {
-		height: 40px;
-	}
-
-	.toggle-all {
-		-webkit-transform: rotate(90deg);
-		transform: rotate(90deg);
-		-webkit-appearance: none;
-		appearance: none;
-	}
-}
 
 @media (max-width: 430px) {
 	.footer {

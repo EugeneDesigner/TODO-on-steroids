@@ -10,7 +10,7 @@ export default class TodoList extends Component {
   }
 
   getItems() {
-      console.log(this.props)
+
     if (this.props.todos) {
 
       return this.props.todos.filter(
@@ -25,7 +25,7 @@ export default class TodoList extends Component {
 
 
   render() {
-    console.log(this.props)
+  
     return (
     <section className="todo__main">
       {this.getItems() ?

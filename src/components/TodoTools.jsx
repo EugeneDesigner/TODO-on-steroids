@@ -19,6 +19,7 @@ export default class TodoTools extends Component {
   }
 
   isSelected(filter) {
+
     return this.props.selectedFilter === filter || false
   }
 
@@ -35,25 +36,25 @@ export default class TodoTools extends Component {
        </span>
        <ul className="todo__footer-filters">
          <li>
-           <a href="#"
+           <span
               onClick={() => this.props.changeFilter('all')}
               className={this.setSelectedClass('all')}>
               All
-            </a>
+            </span>
          </li>
          <li>
-           <a href="#"
+           <span
               onClick={() => this.props.changeFilter('active')}
               className={this.setSelectedClass('active')}>
               Active
-            </a>
+            </span>
          </li>
          <li>
-           <a href="#"
+           <span
               onClick={() => this.props.changeFilter('completed')}
               className={this.setSelectedClass('completed')}>
               Completed
-            </a>
+            </span>
          </li>
        </ul>
        <button className="todo__footer-clear"

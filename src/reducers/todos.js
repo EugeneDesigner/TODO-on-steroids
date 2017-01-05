@@ -54,7 +54,7 @@ function doneEditing(state, itemId, newText) {
 }
 
 function clearCompleted(state) {
-
+  event.preventDefault()
   return state.update('todos',
     (todos) => todos.filterNot(
       (item) => item.get('status') === 'completed'
