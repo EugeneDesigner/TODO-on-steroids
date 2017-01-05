@@ -19,7 +19,8 @@ I decided to create a TODO-app to improve my coding skills (sometimes it is good
 
 
 ###!!NOTICE!!
-Still in Beta version - have some things to sort out:
+**Still in Beta version - have some things to sort out**
+
 1. Register User and save in database
 2. Load 'todos' of the user
 3. Update the menu depending on the status of the user
